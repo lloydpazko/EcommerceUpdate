@@ -1,0 +1,28 @@
+Front Pages
+->Account profile 0%
+->login/forgot password/create account 0%
+->home pages 0%
+->view product 0%
+->add to cart 0%
+->place order 0%
+->payment method 0%
+->email confirmation 0%
+
+securities admin back-end
+->Login 100%
+->forgot 0%
+->email confirmation 0%
+
+others features
+-customer service
+
+admin
+->Multiple Account/profile 5%
+->Category 100%
+->Sub-Category 100%
+->colors 100%
+->brand 100%
+->product list 65%
+->Update product 100%
+->Images product 100%
+->return shipping features 0%
