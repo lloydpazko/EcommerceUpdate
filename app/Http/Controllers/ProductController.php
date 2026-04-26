@@ -32,6 +32,19 @@ class ProductController extends Controller
 
             $getProduct = ProductModel::getProduct($getCategory->id, $getSubCategory->id);
 
+            $page = 0;
+            if(!empty($getProduct->nextPageUrl()))
+            {
+                $parse_url = parse_url($getProduct->nextPageUrl());
+                if(!empty($parse_url['query']))
+                {
+                    parse_str($parse_url['query'],$get_array);
+                    $page = !empty($get_array['page'])? $get_array['page'] : 0;
+                }
+            }
+
+            $data['page'] = $page;
+
             $data['getProduct'] = $getProduct;
             return view('product.list' ,$data);
         }
@@ -48,6 +61,7 @@ class ProductController extends Controller
 
             $getProduct = ProductModel::getProduct($getCategory->id);
             // dd($getProduct->nextPageUrl());
+
             $page = 0;
             if(!empty($getProduct->nextPageUrl()))
             {
@@ -58,6 +72,9 @@ class ProductController extends Controller
                     $page = !empty($get_array['page'])? $get_array['page'] : 0;
                 }
             }
+
+            $data['page'] = $page;
+
             $data['getProduct'] = $getProduct;
 
             return view('product.list' ,$data);

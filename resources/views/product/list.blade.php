@@ -108,7 +108,7 @@
                     @include('product._list')
                 </div>
                 <div style="text-align: center;">
-                <a href="javascript:;" @if(!empty($page)) style="display: none;" @endif data-page="{{ $getProduct }}" class="btn btn-primary LoadMore">Load More</a>
+                <a href="javascript:;" @if(empty($page)) style="display: none;" @endif data-page="{{ $page }}" class="btn btn-primary LoadMore">Load More</a>
                 </div>
                     {{-- end --}}
 
@@ -367,7 +367,7 @@ $('.ChangeSortBy').change(function() {
     var xhr;
     function FilterForm()
     {
-        if(xhr && xhr.readyState !=4){
+        if(xhr && xhr.readyState !=4) {
             xhr.abort();
         }
         // console.log('hi');
@@ -383,6 +383,27 @@ $('.ChangeSortBy').change(function() {
             }
         });
     }
+
+    $('body').delegate('.LoadMore', 'click', function()
+    {
+        var page = $(this).attr('data-page');
+        // console.log(page);
+        if(xhr && xhr.readyState !=4) {
+            xhr.abort();
+        }
+        // console.log('hi');
+        xhr = $.ajax({
+            type : "POST",
+            url : "{{ url('get_filter_product_ajax') }}?page="+page,
+            data : $('#FilterForm').serialize(),
+            dataType : 'json',
+            success : function(data) {
+            $('#getProductAjax').append(data.success)
+            },
+            error: function(data) {
+            }
+        });
+    });
     var i = 0;
 
      // Slider For category pages / filter price
@@ -406,7 +427,8 @@ $('.ChangeSortBy').change(function() {
 		});
 
 		// Update Price Range
-		priceSlider.noUiSlider.on('update', function( values, handle ){
+		priceSlider.noUiSlider.on('update', function( values, handle ) 
+        {
             var start_price = values[0];
             var end_price = values[1]
             $('#get_start_price').val(start_price);
