@@ -334,7 +334,7 @@ $('.ChangeSortBy').change(function() {
     });
 
     $('#get_brand_id').val(ids);
-    FilterFrom();
+    FilterForm();
     });
 
     $('.ChangesColor').click(function() {
@@ -361,7 +361,7 @@ $('.ChangeSortBy').change(function() {
         }
     });
     $('#get_color_id').val(ids);
-    FilterFrom();
+    FilterForm();
     });
 
     var xhr;
@@ -399,6 +399,7 @@ $('.ChangeSortBy').change(function() {
             dataType : 'json',
             success : function(data) {
             $('#getProductAjax').append(data.success)
+            $('.LoadMore').attr('data-page', data.page)
             },
             error: function(data) {
             }
@@ -439,7 +440,7 @@ $('.ChangeSortBy').change(function() {
             i++;
         }
         else{
-            FilterFrom();
+            FilterForm();
         }
 		});
 	}

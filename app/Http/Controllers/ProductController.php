@@ -84,16 +84,52 @@ class ProductController extends Controller
             abort(404);
         }
     }
-    public function GetFilterProductAjax( Request $request)
+    // public function GetFilterProductAjax( Request $request)
+    // {
+    //     $getProduct = ProductModel::paginate(3);
+
+    //     $page = 0;
+    //         if(!empty($getProduct->nextPageUrl()))
+    //         {
+    //             $parse_url = parse_url($getProduct->nextPageUrl());
+    //             if(!empty($parse_url['query']))
+    //             {
+    //                 parse_str($parse_url['query'],$get_array);
+    //                 $page = !empty($get_array['page'])? $get_array['page'] : 0;
+    //             }
+    //         }
+    //     // dd($getProduct);
+    //     // dd($request->all());
+    //     return response()->json([
+    //         "status" => true,
+    //         // "page" => $page,
+    //         "success" => view("product._list",
+    //         ["getProduct" => $getProduct,
+    //         ])->render(),],
+    //         200);
+    // }
+
+    public function GetFilterProductAjax(Request $request)
     {
-        $getProduct = ProductModel::getProduct();
-        // dd($getProduct);
-        // dd($request->all());
+        $getProduct = ProductModel::paginate(1);
+
+        $page = 0;
+
+        if (!empty($getProduct->nextPageUrl())) {
+            $parse_url = parse_url($getProduct->nextPageUrl());
+
+            if (!empty($parse_url['query'])) {
+                parse_str($parse_url['query'], $get_array);
+                $page = $get_array['page'] ?? 0;
+            }
+        }
+
         return response()->json([
             "status" => true,
-            "success" => view("product._list",
-            ["getProduct" => $getProduct,
-            ])->render(),],
-            200);
+            "page" => $page,
+            "success" => view("product._list", [
+                "getProduct" => $getProduct,
+            ])->render(),
+        ], 200);
     }
 }

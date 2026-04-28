@@ -20,31 +20,80 @@
                                             <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
                                             <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
 
-                                        </div><!-- End .product-action-vertical -->
+                                        </div>
 
-                                        {{-- <div class="product-action">
+                                        <div class="product-action">
                                             <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                        </div><!-- End .product-action --> --}}
-                                    </figure><!-- End .product-media -->
+                                        </div>
+                                    </figure>
 
                                     <div class="product-body">
                                         <div class="product-cat">
                                             <a href="{{ ($value->category_slug.'/'.$value->sub_category_slug) }}">{{ $value->sub_category_name }}</a>
-                                        </div><!-- End .product-cat -->
-                                        <h3 class="product-title"><a href="{{ url($value->slug) }}">{{ $value->title }}</a></h3><!-- End .product-title -->
+                                        </div>
+                                        <h3 class="product-title"><a href="{{ url($value->slug) }}">{{ $value->title }}</a></h3>
                                         <div class="product-price">
                                             ${{ number_format($value->price, 2) }}
-                                        </div><!-- End .product-price -->
+                                        </div>
                                         <div class="ratings-container">
                                             <div class="ratings">
-                                                <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
-                                            </div><!-- End .ratings -->
+                                                <div class="ratings-val" style="width: 20%;"></div>
+                                            </div>
                                             <span class="ratings-text">( 2 Reviews )</span>
-                                        </div><!-- End .rating-container -->
+                                        </div>
 
-                                    </div><!-- End .product-body -->
-                                </div><!-- End .product -->
-                            </div><!-- End .col-sm-6 col-lg-4 -->
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
-                        </div><!-- End .row -->
-                    </div><!-- End .products -->
+                        </div>
+                    </div>
+                    <!-- <div class="products mb-3">
+    <div class="row justify-content-center">
+
+        @if(!empty($getProduct) && count($getProduct) > 0)
+
+            @foreach($getProduct as $value)
+
+                @php
+                    $getProductImage = null;
+
+                    if(method_exists($value, 'getImageSingle')){
+                        $getProductImage = $value->getImageSingle($value->id);
+                    }
+                @endphp
+
+                <div class="col-6 col-md-4 col-lg-4">
+                    <div class="product product-7 text-center">
+
+                        <figure class="product-media">
+                            <a href="{{ url($value->slug) }}">
+
+                                @if(!empty($getProductImage))
+                                    <img src="{{ $getProductImage->getLogo() ?? '' }}" class="product-image">
+                                @endif
+
+                            </a>
+                        </figure>
+
+                        <div class="product-body">
+                            <h3 class="product-title">
+                                <a href="{{ url($value->slug) }}">{{ $value->title }}</a>
+                            </h3>
+
+                            <div class="product-price">
+                                ${{ number_format($value->price, 2) }}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            @endforeach
+
+        @else
+            <p>No products found</p>
+        @endif
+
+    </div>
+</div> -->
