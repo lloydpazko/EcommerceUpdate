@@ -111,7 +111,7 @@ class ProductController extends Controller
 
     public function GetFilterProductAjax(Request $request)
     {
-        $getProduct = ProductModel::paginate(1);
+        $getProduct = ProductModel::paginate(3);
 
         $page = 0;
 
